@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	@apply focus:outline-amber-300;
+}
+
+body {
+	@apply bg-amber-950 h-full overflow-x-hidden;
+}
+
+#__next {
+	@apply h-full;
+}
+
+html {
+	@apply h-full;
+}
