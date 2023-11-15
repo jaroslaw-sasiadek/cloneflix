@@ -1,8 +1,13 @@
 import { useState, useCallback } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 import { Logo, Button, Input } from "@/components";
 
 const Auth = () => {
+	const router = useRouter();
+
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -14,13 +19,34 @@ const Auth = () => {
 		);
 	}, []);
 
-	function login() {
-		throw new Error("Function not implemented.");
-	}
+	const login = useCallback(async () => {
+		try {
+			await signIn("credentials", {
+				email,
+				password,
+				redirect: false,
+				callbackUrl: "/",
+			});
 
-	function register() {
-		throw new Error("Function not implemented.");
-	}
+			router.push("/");
+		} catch (error) {
+			console.log(error);
+		}
+	}, [email, password, router]);
+
+	const register = useCallback(async () => {
+		try {
+			await axios.post("/api/register", {
+				email,
+				name,
+				password,
+			});
+
+			login();
+		} catch (error) {
+			console.log(error);
+		}
+	}, [email, name, password, login]);
 
 	return (
 		<div className="relative w-full h-full lg:bg-[url('/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
