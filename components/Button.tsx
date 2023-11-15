@@ -5,9 +5,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = (props: ButtonProps) => {
-	const { label } = props;
+	const { label, ...other } = props;
 	return (
-		<button className="mt-10 py-3 w-full text-amber-100 bg-amber-600 hover:bg-amber-500 focus:outline-amber-300 rounded-md transition">
+		<button
+			{...other}
+			className="mt-10 py-3 w-full text-amber-100 bg-amber-600 hover:bg-amber-500 focus:outline-amber-300 rounded-md transition"
+		>
 			{label}
 		</button>
 	);

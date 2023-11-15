@@ -60,7 +60,10 @@ const Auth = () => {
 						</div>
 						<Button
 							label={variant === "login" ? "Zaloguj" : "Zarejestruj"}
-							onClick={variant === "login" ? login : register}
+							onClick={(event) => {
+								event.preventDefault();
+								variant === "login" ? login() : register();
+							}}
 						/>
 						<p className="mt-10 text-amber-200">
 							{variant === "login"

@@ -5,11 +5,12 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = (props: InputProps) => {
-	const { label } = props;
+	const { label, ...other } = props;
 
 	return (
 		<label className="relative">
 			<input
+				{...other}
 				autoComplete="off"
 				className="
 					block px-6 pt-6 pb-1 w-full 
